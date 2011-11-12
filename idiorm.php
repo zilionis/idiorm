@@ -1165,6 +1165,12 @@
             $this->set($key, $value);
         }
 
+        public function __unset($key) {
+            unset($this->_data[$key]);
+            unset($this->_dirty_fields[$key]);
+        }
+
+
         public function __isset($key) {
             return isset($this->_data[$key]);
         }
