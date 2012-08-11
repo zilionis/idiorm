@@ -38,7 +38,7 @@
      *
      */
 
-    class ORM {
+    class Idiorm {
 
         // ----------------------- //
         // --- CLASS CONSTANTS --- //
@@ -82,7 +82,7 @@
         // --- INSTANCE PROPERTIES --- //
         // --------------------------- //
 
-        // The name of the table the current ORM instance is associated with
+        // The name of the table the current Idiorm instance is associated with
         protected $_table_name;
 
         // Alias for the table to be used in SELECT queries
@@ -153,7 +153,7 @@
          * will be the only configuration required to use Idiorm.
          */
         public static function configure($key, $value=null) {
-            // Shortcut: If only one argument is passed, 
+            // Shortcut: If only one argument is passed,
             // assume it's a connection string
             if (is_null($value)) {
                 $value = $key;
@@ -166,7 +166,7 @@
          * Despite its slightly odd name, this is actually the factory
          * method used to acquire instances of the class. It is named
          * this way for the sake of a readable interface, ie
-         * ORM::for_table('table_name')->find_one()-> etc. As such,
+         * Idiorm::for_table('table_name')->find_one()-> etc. As such,
          * this will normally be the first method called in a chain.
          */
         public static function for_table($table_name) {
@@ -191,7 +191,7 @@
 
         /**
          * Set the PDO object used by Idiorm to communicate with the database.
-         * This is public in case the ORM should use a ready-instantiated
+         * This is public in case the Idiorm should use a ready-instantiated
          * PDO object as its database connection.
          */
         public static function set_db($db) {
@@ -202,7 +202,7 @@
         /**
          * Detect and initialise the character used to quote identifiers
          * (table names, column names etc). If this has been specified
-         * manually using ORM::configure('identifier_quote_character', 'some-char'),
+         * manually using Idiorm::configure('identifier_quote_character', 'some-char'),
          * this will do nothing.
          */
         public static function _setup_identifier_quote_character() {
@@ -232,7 +232,7 @@
         }
 
         /**
-         * Returns the PDO instance used by the the ORM to communicate with
+         * Returns the PDO instance used by the the Idiorm to communicate with
          * the database. This can be called if any low-level DB access is
          * required outside the class.
          */
@@ -298,7 +298,7 @@
 
         /**
          * "Private" constructor; shouldn't be called directly.
-         * Use the ORM::for_table factory method instead.
+         * Use the Idiorm::for_table factory method instead.
          */
         protected function __construct($table_name, $data=array()) {
             $this->_table_name = $table_name;
@@ -335,7 +335,7 @@
         }
 
         /**
-         * Create an ORM instance from the given row (an associative
+         * Create an Idiorm instance from the given row (an associative
          * array of data fetched from the database)
          */
         protected function _create_instance_from_row($row) {
@@ -346,9 +346,9 @@
         }
 
         /**
-         * Tell the ORM that you are expecting a single result
+         * Tell the Idiorm that you are expecting a single result
          * back from your query, and execute it. Will return
-         * a single instance of the ORM class, or false if no
+         * a single instance of the Idiorm class, or false if no
          * rows were returned.
          * As a shortcut, you may supply an ID as a parameter
          * to this method. This will perform a primary key
@@ -369,9 +369,9 @@
         }
 
         /**
-         * Tell the ORM that you are expecting multiple results
+         * Tell the Idiorm that you are expecting multiple results
          * from your query, and execute it. Will return an array
-         * of instances of the ORM class, or an empty array if
+         * of instances of the Idiorm class, or an empty array if
          * no rows were returned.
          */
         public function find_many() {
@@ -383,11 +383,11 @@
          * Return the results as an array
          */
         public function find_array() {
-            return $this->_run(); 
+            return $this->_run();
         }
 
         /**
-         * Tell the ORM that you wish to execute a COUNT query.
+         * Tell the Idiorm that you wish to execute a COUNT query.
          * Will return an integer representing the number of
          * rows returned.
          */
@@ -409,7 +409,7 @@
         }
 
         /**
-         * Force the ORM to flag all the fields in the $data array
+         * Force the Idiorm to flag all the fields in the $data array
          * as "dirty" and therefore update them when save() is called.
          */
         public function force_all_dirty() {
@@ -997,7 +997,7 @@
         }
 
         /**
-         * Return the raw data wrapped by this ORM
+         * Return the raw data wrapped by this Idiorm
          * instance as an associative array. Column
          * names may optionally be supplied as arguments,
          * if so, only those keys will be returned.
