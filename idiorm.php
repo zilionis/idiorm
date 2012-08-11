@@ -380,6 +380,13 @@
         }
 
         /**
+         * Return the results as an array
+         */
+        public function find_array() {
+            return $this->_run(); 
+        }
+
+        /**
          * Tell the ORM that you wish to execute a COUNT query.
          * Will return an integer representing the number of
          * rows returned.
