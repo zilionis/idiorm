@@ -291,6 +291,16 @@
         public static function get_query_log() {
             return self::$_query_log;
         }
+        
+        /**
+         * Enable PSR-1 style static method calls
+         * for_table() and forTable() should be the same
+         */
+        public static function __callStatic($name, $args) {
+            $toLower = function($c) { return '_'.strtolower($c[1]); };
+            $underscoreCased = preg_replace_callback('/([A-Z])/', $toLower, $name);
+            return forward_static_call_array(['Idiorm', $underscoreCased], $args);
+        }
 
         // ------------------------ //
         // --- INSTANCE METHODS --- //
@@ -303,6 +313,16 @@
         protected function __construct($table_name, $data=array()) {
             $this->_table_name = $table_name;
             $this->_data = $data;
+        }
+        
+        /**
+         * Try to call a function in PSR-1 style
+         * find_one() and findOne() should be the same thing
+         */
+        public function __call($name, $args) {
+            $toLower = function($c) { return '_'.strtolower($c[1]); };
+            $underscoreCased = preg_replace_callback('/([A-Z])/', $toLower, $name);
+            return call_user_func_array([$this, $underscoreCased], $args);
         }
 
         /**
