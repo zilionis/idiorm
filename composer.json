@@ -3,7 +3,7 @@
     "type": "library",
     "description": "A lightweight nearly-zero-configuration object-relational mapper and fluent query builder for PHP5",
     "keywords": ["orm"],
-    "homepage": "https://github.com/gabrielhora/idiorm",
+    "homepage": "https://github.com/zilionis/idiorm",
     "license": "BSD",
     "authors": [
         {
